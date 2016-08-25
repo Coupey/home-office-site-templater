@@ -27,7 +27,7 @@ var config = {
       'styles': 'styles',
       'javascripts' : 'javascripts',
       'images' : 'images',
-      'govuk_template': 'frameworks/govuk_template_mustache',
+      'assets': 'assets',
       'govuk_frontend_toolkit': 'node_modules/govuk_frontend_toolkit',
       'govuk_elements_sass': 'node_modules/govuk-elements-sass/public/sass'
     },
@@ -65,7 +65,7 @@ var config = {
 
 // tasks for copying the base files
 gulp.task('copy:assets', function () {
-  gulp.src([config.app.govuk_template +'/assets/**/*']).pipe(gulp.dest(config.target.assets));
+  gulp.src(['assets/**/*']).pipe(gulp.dest(config.target.assets));
 });
 gulp.task('copy:javascripts', function () {
   gulp.src(['javascripts/**/*']).pipe(gulp.dest(config.target.scripts));
@@ -156,7 +156,7 @@ gulp.task('connect', function() {
 });
 gulp.task('uri', function(){
   gulp.src(__filename)
-  .pipe(open({uri: 'http://localhost:8000'}));
+  .pipe(open({uri: 'http://localhost:8000/example.html'}));
 });
 
 gulp.task('startwatch', function() {
