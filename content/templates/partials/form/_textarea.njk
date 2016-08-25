@@ -1,0 +1,27 @@
+{% macro textarea_component(data = '') %}
+
+<fieldset>
+  <legend class="visually-hidden">{{data.label}}</legend>
+  <div id="{{data.field_id}}-form-group" class="form-group {{data.classes}}" {{data.attributes}}>
+    <label class="form-label-bold text" for="{{data.field_id}}">
+      {{data.label}}
+    </label>
+    <div>
+      {{data.detail}}
+    </div>
+    <div class="form-hint text">
+      {{data.help}}
+    </div>
+    <div id="{{data.field_id}}-error-message" class="form-error validation-message">
+      {{data.error}}
+    </div>
+    <textarea id="{{data.field_id}}" name="{{data.field_id}}" class="form-control {{ data.inputClasses }}" rows="{{data.rows|default('5')}}" {{data.inputAttributes}}
+      {% for item in data.parsley_validation %}data-parsley-{{ item.validator }}="{{ item.value }}" data-parsley-{{ item.validator }}-message="{{ item.error_message }}" {% endfor %}
+      data-parsley-class-handler="#{{data.field_id}}-form-group" 
+      data-parsley-errors-container="#{{data.field_id}}-error-message"
+      >{{data.value}}</textarea>
+    
+  </div>
+</fieldset>
+
+{% endmacro %}

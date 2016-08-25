@@ -1,0 +1,40 @@
+{
+  "courseTitle": {
+    "field_id": "courseTitle",
+    "inputClasses": "form-control full-width",
+    "classes": "small-bottom-margin"
+  },
+  "courseLevel": {
+    "field_id": "courseLevel",
+    "inputClasses": "form-control full-width",
+    "classes": "small-bottom-margin"
+  },
+  "studyAddress": {
+    "field_id": "studyAddress",
+    "inputClasses": "form-control full-width",
+    "classes": "small-bottom-margin",
+    "rows": "4"
+  },
+  "send_button": {
+    "field_id": "send_button",
+    "label": "Send",
+    "inputClasses": "",
+    "type": "submit"
+  },
+  "confirm": {
+    "field_id": "confirm",
+    "label": "Are these details correct?",
+    "help": "",
+    "classes": "inline",
+     "options": [
+      {
+        "optionlabel": "Yes",
+        "reveal_target": "send_button"
+      },
+      {
+        "optionlabel": "No",
+        "reveal_target": "correct_errors"
+      }
+    ]
+  }
+}

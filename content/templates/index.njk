@@ -1,0 +1,48 @@
+{% extends "content/templates/layouts/_app.njk" %}
+
+{# data objects for this page #}
+  {% set templateData %}
+    {% include 'content/data/index.json' %}
+  {% endset %}
+{# end of data objects #}
+
+{% block content %}
+{% if page_header_local %}{{ page_header_local|safe}}{% else %}{{ page_header|safe }}{% endif %}
+  <div class="transaction">
+    <h2 class="heading-medium page-title">Find an applicant</h2>
+
+    <div id="previous-status-success" class="govuk-box-highlight hidden" style="padding: 1em 0 0em 0;">
+      <h1 class="bold-large" style="padding: 20px 0 0 0; color: #fff;">Email sent</h1>
+      <p style="padding: 0px 20px 20px 20px; color: #fff;">to <br>
+        <span class="bold-small" id="previous-applicant-name"></span>
+      </p>
+    </div>
+
+    <form id="uan-search" action="xxxx" method="post" class="form">
+      {{ text_input_macro.text_component(data = (templateData | tojson('search_input') )) }}
+      {{ button_macro.button_component(data = (templateData | tojson('find_button') )) }}
+    </form>
+  </div>
+
+{% endblock %}
+
+{% block page_scripts %}
+  <script src="{{ asset_path }}javascripts/vendor/parsley/parsley.min.js"></script>
+  <script src="{{ asset_path }}javascripts/form-utilities.js"></script>
+  <script src="{{ asset_path }}javascripts/index.js"></script>
+{% endblock %}
+
+
+{% block dev_scripts %}
+  <script src="{{ asset_path }}javascripts/dev/jquery.mockjax.min.js"></script>
+  <script src="{{ asset_path }}javascripts/dev/mockdata.js"></script>{# mock data to use for dev #}
+
+  <script>
+    // mock ajax responses for this page
+    $.mockjax({
+      url: /^\/application\/([\d]{4})-([\d]{4})-([\d]{4})-([\d]{4})$/,
+      responseText: GOVUK.mockData.validApplication
+    });
+  </script>
+  
+{% endblock %}

@@ -1,0 +1,7 @@
+{% macro button_component(data = '') %}
+
+<div class="form-group">
+	<input id="id-{{data.field_id}}" type="{{data.type}}" class="button {{data.inputClasses}}" value="{{data.label}}">
+</div>
+
+{% endmacro %}

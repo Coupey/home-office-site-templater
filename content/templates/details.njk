@@ -1,0 +1,138 @@
+{% extends "content/templates/layouts/_app.njk" %}
+
+{# data objects for this page #}
+  {% set templateData %}
+    {% include 'content/data/details.json' %}
+  {% endset %}
+{# end of data objects #}
+
+{% block content %}
+{% if page_header_local %}{{ page_header_local|safe}}{% else %}{{ page_header|safe }}{% endif %}
+
+<div id='applicant-details' class='hidden' class="transaction hidden">
+  <form id="details" action="xxxx" method="post" class="form">
+    <div>
+      <h2 class="heading-medium page-title no-bottom-margin" >Course details</h2>
+      <p class="form-hint text">Enter the course details from CAS</p>
+
+      <table>
+        <tbody>
+          <tr>
+            <th>Sponsor name:</th>
+            <td class="no-padding wide-cell" id="sponsor">{% raw %}{{ data.sponsor }}{% endraw %}</td>
+          </tr>
+          <tr>
+            <th>Course:</th>
+            <td class="no-padding wide-cell">{{ text_input_macro.text_component(data = (templateData | tojson('courseTitle') )) }}</td>
+          </tr>
+          <tr>
+            <th>Course level:</th>
+            <td class="no-padding wide-cell">{{ text_input_macro.text_component(data = (templateData | tojson('courseLevel') )) }}</td>
+          </tr>
+          <tr>
+            <th class="top-align">Main study address:</th>
+            <td class="no-padding wide-cell">{{ textarea_input_macro.textarea_component(data = (templateData | tojson('studyAddress') )) }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div>
+      <h2 class="heading-medium add-top-margin no-bottom-margin">Applicant details</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th>Unique application no.</th>
+            <th>Name</th>
+            <th>Passport no.</th>
+            <th>Police reg.</th>
+            <th>Preview</th>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; position: relative; top: 0.2em;" id="uan">{% raw %}{{ data.uan }}{% endraw %}</td>
+            <td style="vertical-align: top; position: relative; top: 0.2em;" id="name">{% raw %}{{ data.name }}{% endraw %}</td>
+            <td style="vertical-align: top; position: relative; top: 0.2em;" id="passportNo">{% raw %}{{ data.passportNo }}{% endraw %}</td>
+            <td style="vertical-align: top; position: relative; top: 0.2em;" id="policeRegistration">{% raw %}{{ data.policeRegistration }}{% endraw %}</td>
+            <td>
+              <details role="group" >
+              <summary role="button" aria-controls="details-content-0" aria-expanded="true">
+              <span class="summary">Preview email</span>
+              </summary>
+              
+              </details>
+            </td>
+          </tr>
+          <tr>
+            <td class="no-bottom-border" colspan="5">
+              <div class="hidden" id="details-content-0" aria-hidden="false">
+                <div style="margin-top: 15px; background: #bfff; z-index: 1000;">
+                  <div class="panel panel-border-narrow" style="border: 1px solid #bfc1c3; border-left-width: 5px; margin-bottom: -1px;">
+                    <p> To: wayne.thornton@address.com
+                    <br> Subject: <strong>Your Tier 4 (General) student visa application decision</strong></p>
+                  </div>
+                  <div class="panel panel-border-narrow" style="border: 1px solid #bfc1c3; border-left-width: 5px;">
+                    <p>Your Tier 4 (General) student visa application has been granted. You have been given permission to study: </p>
+                    <p>Course: Electronic Engineering
+                      <br> Course level: Master of Engineering
+                      <br> Sponsor: Manchester University
+                    <br> Address: Faculty of Engineering, Electronic House, M2 4TG</p>
+                    <p>We will send your biometric residence permit (BRP) within 7 working days. The courier will need proof of identity and a signature. See <a href="http://gov.uk/brp">gov.uk/brp</a> for more information about the BRP. </p>
+                    <p><strong>Travelling out of the UK?</strong></p>
+                    <p>You should not make any travel arrangements until you receive your BRP. </p>
+                    <p><strong>What you need to do now</strong></p>
+                    <p>Go to <a href="http://gov.uk/leaflet.to.come">gov.uk/leaflet.to.come</a> for the conditions of your stay in the UK.</p>
+                    <p>If you have been granted less time than applied for, you may get a partial refund of your Immigration Health Surcharge payment.</p>
+                    <p>If you’re unhappy with the amount or conditions of your leave you can ask for your application to be reviewed. See <a href="http://gov.uk/ask-for-a-visa-administrative-review/if-youre-in-the-uk">gov.uk/ask-for-a-visa-administrative-review/if-youre-in-the-uk</a>.</p>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      {{ radio_buttons_macro.radio_component(data = (templateData | tojson('confirm') )) }}
+        <div class="panel panel-no-border hidden" id="send_button" aria-hidden="true" >
+          {{ button_macro.button_component(data = (templateData | tojson('send_button') )) }}
+        </div>
+        <div class="panel panel-border-narrow hidden" id="correct_errors" aria-hidden="true" >
+          <p><strong>Correct any errors in CID and <a href="javascript:window.location.reload();">search again</a></strong></p>
+        </div>
+
+    </form>
+  </div>
+
+{% endblock %}
+
+{% block page_scripts %}
+  <script src="{{ asset_path }}javascripts/vendor/parsley/parsley.min.js"></script>
+  <script src="{{ asset_path }}javascripts/form-utilities.js"></script>
+  <script src="{{ asset_path }}javascripts/details.js"></script>
+{% endblock %}
+
+
+{% block dev_scripts %}
+  <script src="{{ asset_path }}javascripts/dev/jquery.mockjax.min.js"></script>
+  <script src="{{ asset_path }}javascripts/dev/mockdata.js"></script>{# mock data to use for dev #}
+
+  <script>
+    // mock ajax responses for this page
+
+    // get applicant details
+    $.mockjax({
+      url: /^\/application\/([\d]{4})-([\d]{4})-([\d]{4})-([\d]{4})$/,
+      responseText: GOVUK.mockData.validApplication
+    });
+
+    // post applicant course details
+    $.mockjax({
+      url: /^\/message\/send$/,
+      responseText: GOVUK.mockData.successfulGrant
+    });
+
+
+  </script>
+  
+{% endblock %}

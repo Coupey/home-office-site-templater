@@ -1,0 +1,105 @@
+{
+  "text_input": {
+    "field_id": "textfield_id",
+    "label": "Text field label",
+    "detail": "Text field detail",
+    "help": "Help/hint text for text field",
+    "classes": "",
+    "attributes": "",
+    "inputClasses": "",
+    "inputAttributes": "",
+    "value": "",
+    "parsley_validation": 
+    [
+      {
+        "validator": "required",
+        "value": true,
+        "error_message":"This is a required field"
+      }
+    ]
+  },
+  "textarea_input": {
+    "field_id": "textareafield_id",
+    "label": "Text area field label",
+    "detail": "Text area field detail",
+    "help": "Help/hint text for text area field",
+    "classes": "",
+    "attributes": "",
+    "inputClasses": "",
+    "inputAttributes": "",
+    "value": "",
+    "rows": "4",
+    "parsley_validation": 
+    [
+      {
+        "validator": "required",
+        "value": true,
+        "error_message":"This is a required field"
+      }
+    ]
+  },
+  "radio_buttons": {
+    "field_id": "radio_options_id",
+    "label": "This is an example of using radio buttons",
+    "help": "Option 3 will reveal additional content",
+    "classes": "",
+     "options": [
+      {
+        "optionlabel": "Option 1"
+      },
+      {
+        "optionlabel": "Option 2"
+      },
+      {
+        "optionlabel": "Option 3",
+        "reveal_target": "example_reveal"
+      }
+    ],
+    "parsley_validation": 
+    [
+      {
+        "validator": "required",
+        "value": true,
+        "error_message":"You must choose one of the options"
+      }
+    ]
+  },
+  "check_boxes": {
+    "field_id": "check_options_id",
+    "label": "This is an example of using check boxes",
+    "help": "Select one or more of the options below",
+    "classes": "",
+     "options": [
+      {
+        "optionlabel": "Option 1"
+      },
+      {
+        "optionlabel": "Option 2"
+      },
+      {
+        "optionlabel": "Option 3"
+      }
+    ]
+  },
+  "date_entry": {
+    "field_id": "date_of_birth",
+    "label": "Client's date of birth",
+    "help": "For example, 21 4 1979",
+    "parsley_validation": 
+    [
+      {
+        "validator": "required",
+        "value": true,
+        "error_message_day":"Client day of birth is a required field",
+        "error_message_month":"Client month of birth is a required field",
+        "error_message_year":"Client year of birth is a required field"
+      }
+    ]
+  },
+  "button": {
+    "field_id": "submit_button",
+    "label": "Continue",
+    "inputClasses": "",
+    "type": "submit"
+  }
+}

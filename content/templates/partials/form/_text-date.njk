@@ -1,0 +1,58 @@
+{% macro textdate_component(data = '') %}
+
+<div id="{{data.field_id}}-form-group" class="form-group date-group {{data.classes}}">
+  <fieldset>
+    <legend class="form-label-bold text">
+      {{data.label}}
+    </legend>
+    <div class="form-date">
+      <div class="form-hint">
+        {{data.help}}
+      </div>
+      <div id="{{data.field_id}}-error-message" class="form-error validation-message">
+        {{data.error}}
+      </div>
+      <div class="form-group form-group-day">
+        <label for="{{data.field_id}}-day">Day</label>
+        <input type="text" id="{{data.field_id}}-day" name="{{data.field_id}}-day" class="day js-day form-control" size="2" maxlength="2" autocomplete="off" 
+        data-parsley-range="[1,31]"
+        data-parsley-range-message="Day must be between 1 and 31"
+        data-parsley-type="number"
+        data-parsley-type-message="Day must be between 1 and 31"
+        data-parsley-errors-container="#{{data.field_id}}-error-message"
+        data-parsley-class-handler="#{{data.field_id}}-form-group" 
+        {% for item in data.parsley_validation %}data-parsley-{{ item.validator }}="{{ item.value }}" data-parsley-{{ item.validator }}-message="{{ item.error_message_day }}" {% endfor %}
+        data-parsley-datemultiple = '{{data.field_id}}' 
+        data-parsley-datemultiple-message = 'The date of birth does not seem to be a valid date'
+        >
+      </div>
+      <div class="form-group form-group-month">
+        <label for="{{data.field_id}}-month">Month</label>
+        <input type="text" id="{{data.field_id}}-month" name="{{data.field_id}}-month" class="month js-month form-control" size="2" maxlength="2" autocomplete="off" 
+        data-parsley-range="[1,12]"
+        data-parsley-range-message="Month must be between 1 and 12"
+        data-parsley-type="number"
+        data-parsley-type-message="Month must be between 1 and 12"
+        data-parsley-errors-container="#{{data.field_id}}-error-message"
+        data-parsley-class-handler="#{{data.field_id}}-form-group" 
+        {% for item in data.parsley_validation %}data-parsley-{{ item.validator }}="{{ item.value }}" data-parsley-{{ item.validator }}-message="{{ item.error_message_month }}" {% endfor %}
+        >
+      </div>
+      <div class="form-group form-group-year">
+        <label for="{{data.field_id}}-year">Year</label>
+        <input type="text" id="{{data.field_id}}-year" name="{{data.field_id}}-year" class="year js-year form-control" size="4" maxlength="4" autocomplete="off" 
+        data-parsley-range="[1890,2115]"
+        data-parsley-range-message="Please enter a valid year"
+        data-parsley-type="number"
+        data-parsley-type-message="Please enter a valid year"
+        data-parsley-errors-container="#{{data.field_id}}-error-message"
+        data-parsley-class-handler="#{{data.field_id}}-form-group" 
+        {% for item in data.parsley_validation %}data-parsley-{{ item.validator }}="{{ item.value }}" data-parsley-{{ item.validator }}-message="{{ item.error_message_year }}" {% endfor %}
+        
+        >
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+{% endmacro %}

@@ -1,0 +1,76 @@
+{% extends "content/templates/layouts/_app.njk" %}
+
+{# data objects for this page #}
+  {% set templateData %}
+    {% include 'content/data/example.json' %}
+  {% endset %}
+  {% set page_header_local %}{% endset %}{# use to override the default page header #}
+{# end of data objects #}
+
+{% block content %}
+
+  {% if page_header_local %}{{ page_header_local | safe}}{% else %}{{ page_header | safe }}{% endif %}
+  
+  {% include 'content/templates/layouts/includes/error_summary.html' %}{# include if this page has validation requirements #}
+
+  <div class="transaction">
+    <h2 class="heading-medium page-title">Example page</h2>
+    <form id='example_form' action="xxxx" method="post" class="form">
+      {{ text_input_macro.text_component(data = (templateData | tojson('text_input') )) }}
+      {{ textarea_input_macro.textarea_component(data = (templateData | tojson('textarea_input') )) }}
+      {{ radio_buttons_macro.radio_component(data = (templateData | tojson('radio_buttons') )) }}
+        <div class="panel hidden" id="example_reveal" aria-hidden="true" >
+          Additional content revealed by radio button - could be text or more questions/inputs etc
+        </div>
+      {{ check_boxes_macro.check_component(data = (templateData | tojson('check_boxes') )) }}
+      {{ textdate_macro.textdate_component(data = (templateData | tojson('date_entry') )) }}
+
+      {% raw %}
+      <div id="test-template" class='nunjucks-template'>
+        <table>
+          <tr><td>{{ variable1 }}</td></tr>
+          <tr><td>{{ variable2 }}</td></tr>
+          <tr><td>{{ variable3 }}</td></tr>
+        </table>
+
+      </div>
+      {% endraw %}
+
+      {% raw %}
+      <div id='applicant-details-template' class='nunjucks-template'>
+        <h2 class="heading-medium add-top-margin no-bottom-margin">Applicant details</h2>
+        <table>
+          <tbody>
+            <tr>
+              <th>Unique application no.</th>
+              <th>Name</th>
+              <th>Passport no.</th>
+              <th>Police reg.</th>
+            </tr>
+            <tr>
+              <td style="vertical-align: top; position: relative; top: 0.2em;" id="uan">{{ data.uan }}</td>
+              <td style="vertical-align: top; position: relative; top: 0.2em;" id="name">{{ data.name }}</td>
+              <td style="vertical-align: top; position: relative; top: 0.2em;" id="passportNo">{{ data.passportNo }}</td>
+              <td style="vertical-align: top; position: relative; top: 0.2em;" id="policeRegistration">{{ data.policeRegistration }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {% endraw %}
+
+      <a id='swapdata' href='javascript:changeData();'>Swap data</a>
+
+
+      {{ button_macro.button_component(data = (templateData | tojson('button') )) }}
+    </form>
+  </div>
+{% endblock %}
+
+{% block page_scripts %}
+  <script src="{{ asset_path }}javascripts/vendor/parsley/parsley.min.js"></script>
+  <script src="{{ asset_path }}javascripts/vendor/nunjucks/nunjucks.js"></script>
+  <script src="{{ asset_path }}javascripts/form-utilities.js"></script>
+  <script src="{{ asset_path }}javascripts/example.js"></script>
+{% endblock %}
+
+

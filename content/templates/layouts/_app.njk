@@ -1,0 +1,49 @@
+{% extends "content/templates/layouts/_govuk_template.njk" %}
+
+{# all the imported macro components for the app #}
+  {% import "content/templates/partials/form/_text.njk" as text_input_macro %}
+  {% import "content/templates/partials/form/_textarea.njk" as textarea_input_macro %}
+  {% import "content/templates/partials/form/_radio-buttons.njk" as radio_buttons_macro %}
+  {% import "content/templates/partials/form/_check-boxes.njk" as check_boxes_macro %}
+  {% import "content/templates/partials/form/_text-date.njk" as textdate_macro %}
+  {% import "content/templates/partials/form/_button.njk" as button_macro %}
+{# end of imported components #}
+
+{# app-specific template overrides #}
+	{% block page_title %}UK Visas and Immigration{% endblock %}
+	{% set asset_path %}/public/{% endset %}
+	{% set global_proposition_name %}UK Visas and Immigration{% endset %}
+	{% set global_application_name %}Access UK outgoing communications{% endset %}
+	{% set cookieText %}We have placed cookies on your computer to help make this website better. You can change your cookies settings at any time and can <a href="cookies.html">find out about cookies here</a>. If you continue using this site we will assume you accept these cookies.{% endset %}
+	{% set global_header_text %}Home Office{% endset %}
+	{% set homepage_url %}https://hodigital.blog.gov.uk/{% endset %}
+	{% set logo_link_title %}Go to the Home Office Digital blog{% endset %}
+  {% set page_header %}<h1 class="heading-xlarge heading-xlarge-min-bottom"><span class="heading-secondary">{{global_application_name}}</span></h1>{% endset %}
+{# end of template overrides #}
+
+{% block head %}
+  {% include "content/templates/layouts/includes/head.html" %}
+{% endblock %}
+
+{% block phase_banner %}
+  {% include "content/templates/layouts/includes/phase_banner_alpha.html" %}
+{% endblock %}
+
+{% block cookie_message %}
+	<p>{{cookieText | safe }}</p>
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "content/templates/layouts/includes/propositional_navigation.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{# use this for javascript files used by every page #}
+{% block body_end %}
+  {% include "content/templates/layouts/includes/scripts.html" %}
+{% endblock %}
+
+

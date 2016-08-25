@@ -1,0 +1,14 @@
+{
+  "search_input": {
+    "field_id": "uan",
+    "label": "Unique application number (UAN)",
+    "help": "For example 1212-2222-3333-4444",
+    "inputClasses": "form-control-1-4"
+  },
+  "find_button": {
+    "field_id": "submit_button",
+    "label": "Find",
+    "inputClasses": "",
+    "type": "submit"
+  }
+}
