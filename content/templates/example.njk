@@ -26,7 +26,7 @@
       {{ textdate_macro.textdate_component(data = (templateData | tojson('date_entry') )) }}
 
       {% raw %}
-      <div id="test-template" class='nunjucks-template'>
+      <div id="example-template" class='nunjucks-template'>
         <table>
           <tr><td>{{ variable1 }}</td></tr>
           <tr><td>{{ variable2 }}</td></tr>
@@ -48,17 +48,17 @@
               <th>Police reg.</th>
             </tr>
             <tr>
-              <td style="vertical-align: top; position: relative; top: 0.2em;" id="uan">{{ data.uan }}</td>
-              <td style="vertical-align: top; position: relative; top: 0.2em;" id="name">{{ data.name }}</td>
-              <td style="vertical-align: top; position: relative; top: 0.2em;" id="passportNo">{{ data.passportNo }}</td>
-              <td style="vertical-align: top; position: relative; top: 0.2em;" id="policeRegistration">{{ data.policeRegistration }}</td>
+              <td id="uan">{{ data.uan }}</td>
+              <td id="name">{{ data.name }}</td>
+              <td id="passportNo">{{ data.passportNo }}</td>
+              <td id="policeRegistration">{{ data.policeRegistration }}</td>
             </tr>
           </tbody>
         </table>
       </div>
       {% endraw %}
 
-      <a id='swapdata' href='javascript:changeData();'>Swap data</a>
+      <div style="margin-top:20px;margin-bottom:20px;"><a  id='swapdata' href='javascript:changeData();'>Swap data</a></div>
 
 
       {{ button_macro.button_component(data = (templateData | tojson('button') )) }}

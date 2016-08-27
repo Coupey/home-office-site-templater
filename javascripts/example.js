@@ -66,11 +66,11 @@ $(document).ready(function(){
   });
 
 
-  // render some json data to the screen via nunjucks
+  // render some json data (which, for instance, could have been received from an ajax call on this page) to the screen via nunjucks
   var testData = {
-    "variable1":"Nunjucks variable 1",
-    "variable2":"Nunjucks variable 2",
-    "variable3":"Nunjucks variable 3"
+    "variable1":"Dynamic text 1",
+    "variable2":"Dynamic text 2",
+    "variable3":"Dynamic text 3"
   };
 
 
@@ -109,7 +109,7 @@ $(document).ready(function(){
 
   // render the templates
   GOVUK.formUtilities.renderNunjucksTemplate('applicant-details-template',validApplicationData1,templates);
-  GOVUK.formUtilities.renderNunjucksTemplate('test-template',testData,templates);
+  GOVUK.formUtilities.renderNunjucksTemplate('example-template',testData,templates);
   
 });
 
